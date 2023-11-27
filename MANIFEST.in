@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include abtl_addon *.css
+recursive-include abtl_addon *.csv
+recursive-include abtl_addon *.html
+recursive-include abtl_addon *.ico
+recursive-include abtl_addon *.js
+recursive-include abtl_addon *.json
+recursive-include abtl_addon *.md
+recursive-include abtl_addon *.png
+recursive-include abtl_addon *.py
+recursive-include abtl_addon *.svg
+recursive-include abtl_addon *.txt
+recursive-exclude abtl_addon *.pyc
