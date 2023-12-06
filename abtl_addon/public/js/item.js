@@ -139,28 +139,23 @@ frappe.ui.form.on('Item', {
 
 frappe.ui.form.on('Item', {
     onload(frm) {
-        $.each(cur_frm.doc.custom_item_price, function(_i, e){
-            if(e.idx >= 1){
-                frappe.db.get_list('Item Price',{ 
-                    fields:['price_list','price_list_rate'], 
-                    filters:{ 
-                        'item_code':cur_frm.doc.name,
-                        // 'price_list':e.price_list,
-                        'selling':1
-                    } 
-                }).then(function(r){
-                    console.log(r);
-                    frm.doc.custom_item_price = [];
-                    $.each(r, function(_i, e){
-                        let entry = frm.add_child("custom_item_price");
-                        entry.price_list = e.price_list;
-                        entry.item_rate = e.price_list_rate;
-                    });
-                    refresh_field("custom_item_price");
-                    cur_frm.save();
-                }); 
-            }
-        });
+        frappe.db.get_list('Item Price',{ 
+            fields:['price_list','price_list_rate'], 
+            filters:{ 
+                'item_code':cur_frm.doc.name,
+                'selling':1
+            } 
+        }).then(function(r){
+            console.log(r);
+            frm.doc.custom_item_price = [];
+            $.each(r, function(_i, e){
+                let entry = frm.add_child("custom_item_price");
+                entry.price_list = e.price_list;
+                entry.item_rate = e.price_list_rate;
+            });
+            refresh_field("custom_item_price");
+            cur_frm.save();
+        }); 
     }
 });
 
