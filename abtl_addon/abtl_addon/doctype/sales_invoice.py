@@ -14,11 +14,11 @@ def branch_wise_store_filter(branch):
     return store
 
 
-# Customer Wise Defualt Payment Mode
+# Store Wise Defualt Payment Mode
 @frappe.whitelist()
-def default_set_payment_mode(customer):
+def default_set_payment_mode(store):
     defualt = []  
-    is_def_payment = frappe.db.sql("select mode_of_payment from `tabCustomer Wise Payment Item` where parent = %s AND is_default = 1", customer)
+    is_def_payment = frappe.db.sql("select mode_of_payment from `tabStore Payment Item` where parent = %s AND is_default = 1", store)
     for pay in is_def_payment:
         defualt.append(pay[0])
     return defualt
@@ -32,3 +32,10 @@ def default_set_payment_mode(customer):
 #     for pay in payment:
 #         mode_payment.append(pay[0])
 #     return mode_payment
+
+
+# Cash Payment Button
+@frappe.whitelist()
+def cash_payment_action(doc):
+    doc = json.loads(doc)
+    frappe.msgprint(doc.get("name"))
