@@ -38,4 +38,23 @@ def default_set_payment_mode(store):
 @frappe.whitelist()
 def cash_payment_action(doc):
     doc = json.loads(doc)
-    frappe.msgprint(doc.get("name"))
+    pe = frappe.get_doc({
+        "doctype": "Payment Entry",
+        "payment_type" : "Receive",
+        "company" : doc.get("company"),
+        "cost_center" : doc.get("cost_center"),
+        "posting_date" : doc.get("posting_date"),
+        "mode_of_payment" : "Cash",
+        "party_type" : "Customer",
+        "party" : doc.get("customer"),
+        "paid_to" : "1110 - Cash - A",
+        "paid_amount" : doc.get("rounded_total"),
+        "received_amount" : doc.get("rounded_total"),
+    })    
+    pe.append("references",{
+        "reference_doctype":"Sales Invoice",
+        "reference_name":doc.get("name"),
+        "allocated_amount":doc.get("rounded_total"),
+    })   
+    pe.insert()
+    frappe.msgprint("Successfull Created Payment Entry")

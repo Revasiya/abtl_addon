@@ -6,6 +6,8 @@ frappe.ui.form.on('Sales Invoice', {
 	//Mode Of Payment Button
     refresh: function(frm) {
         if(!frm.is_new()){
+            
+            //Cash Payment
             frm.add_custom_button(__('Cash Payment'), function(){
                 frappe.call({
                 method:"abtl_addon.abtl_addon.doctype.sales_invoice.cash_payment_action",
@@ -13,10 +15,23 @@ frappe.ui.form.on('Sales Invoice', {
                     doc:cur_frm.doc,
                 },
                 callback:function(r){
-                    console.log("***************CONSOLE*******************")
+                    console.log("***************Payment Entry Created*******************")
                 }
                 });
             }, __("Mode Of Payment")).css({ 'background-color': '#10a139', 'color': 'white' });
+
+            // Visa Payemnt
+            frm.add_custom_button(__('Visa Payment'), function(){
+                frappe.call({
+                method:"abtl_addon.abtl_addon.doctype.sales_invoice.cash_payment_action",
+                args:{
+                    doc:cur_frm.doc,
+                },
+                callback:function(r){
+                    console.log("***************Payment Entry Created*******************")
+                }
+                });
+            }, __("Mode Of Payment")).css({ 'background-color': '#ed7a21', 'color': 'white' });
         }    
         
     },
