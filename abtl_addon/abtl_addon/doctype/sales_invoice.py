@@ -34,17 +34,17 @@ def default_set_payment_mode(store):
 #     return mode_payment
 
 
-# Cash Payment Button
+# Cash Payment
 @frappe.whitelist()
 def cash_payment_action(doc):
     doc = json.loads(doc)
     pe = frappe.get_doc({
         "doctype": "Payment Entry",
         "payment_type" : "Receive",
+        "mode_of_payment" : "Cash",
         "company" : doc.get("company"),
         "cost_center" : doc.get("cost_center"),
         "posting_date" : doc.get("posting_date"),
-        "mode_of_payment" : "Cash",
         "party_type" : "Customer",
         "party" : doc.get("customer"),
         "paid_to" : "1110 - Cash - A",
@@ -57,4 +57,34 @@ def cash_payment_action(doc):
         "allocated_amount":doc.get("rounded_total"),
     })   
     pe.insert()
+    pe.submit()
     frappe.msgprint("Successfull Created Payment Entry")
+
+
+# Visa Payment
+@frappe.whitelist()
+def visa_payment_action(doc,reference_no,reference_date):
+    doc = json.loads(doc)
+    pe = frappe.get_doc({
+        "doctype": "Payment Entry",
+        "payment_type" : "Receive",
+        "mode_of_payment":"Credit Card",
+        "company" : doc.get("company"),
+        "cost_center" : doc.get("cost_center"),
+        "posting_date" : doc.get("posting_date"),
+        "party_type" : "Customer",
+        "party" : doc.get("customer"),
+        "paid_to" : "1201 - Bank Muscat - A",
+        "paid_amount" : doc.get("rounded_total"),
+        "received_amount" : doc.get("rounded_total"),
+        "reference_no" : reference_no,
+        "reference_date" : reference_date,
+    })    
+    pe.append("references",{
+        "reference_doctype":"Sales Invoice",
+        "reference_name":doc.get("name"),
+        "allocated_amount":doc.get("rounded_total"),
+    })   
+    pe.insert()
+    pe.submit()
+    frappe.msgprint("Successfull Created Visa Payment Entry")    
