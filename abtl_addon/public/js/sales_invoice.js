@@ -97,7 +97,7 @@ frappe.ui.form.on('Sales Invoice', {
                             j.forEach(function(d) {
                                 total += d.amount;
                             });
-                            if(cur_frm.doc.rounded_total >= total){
+                            if(cur_frm.doc.outstanding_amount >= total){
                                 $.each(j,function(i1,j1){
                                 
                                     //Cash

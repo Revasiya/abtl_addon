@@ -36,11 +36,13 @@ def sales_person_wise_reserved_qty_item(item_code,delivery_date):
 
 
 
-# Item Wise Sales Person Reserved QTY
+# Item Zero Not Show
 # @frappe.whitelist()
-# def sales_person_wise_reserved_qty(item_code):
-#     res_qty = []  
-#     sale_person_qty = frappe.db.sql("select item_code,owner,qty,delivery_date,parent,warehouse,delivered_qty,docstatus from `tabSales Order Item` where item_code = %s ", item_code)
-#     for sp_qty in sale_person_qty:
-#         res_qty.append(sp_qty)
-#     return res_qty
+# def item_zero_not_show(warehouse):
+#     zero_qty = []  
+#     itm_qty = frappe.db.sql("select item_code from `tabBin` where warehouse = %s AND actual_qty != '0'", warehouse)
+#     # itm_qty = frappe.db.sql(f"""select item_code from `tabBin` where warehouse = '{warehouse}' AND actual_qty != '0' """)
+#     for qty in itm_qty:
+#         zero_qty.append(qty[0])
+#     return zero_qty
+    
