@@ -37,6 +37,7 @@ doctype_js = {
     "Sales Invoice":"public/js/sales_invoice.js",
     "Sales Order":"public/js/sales_order.js",
     "Payment Entry":"public/js/payment_entry.js",
+    # "User":"public/js/user.js",
     # "Purchase Receipt":"public/js/purchase_receipt.js",
     }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -138,6 +139,9 @@ doctype_js = {
 doc_events = {
 	"Item Price": {
 		"after_insert": "abtl_addon.abtl_addon.doctype.item_price.after_insert"
+	},
+    "User": {
+		"after_insert": "abtl_addon.abtl_addon.doctype.user.after_insert"
 	}
 }
 

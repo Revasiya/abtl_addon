@@ -4,6 +4,18 @@
 import json
 import frappe
 
+
+def after_insert(doc,method):
+    if doc.name and doc.store:
+        user_per = frappe.get_doc({
+        "doctype": "User Permission",
+        "user":doc.name,
+        "allow":"Warehouse",
+        "for_value":"10001-Muscat Stor 1 - A",
+        })
+        user_per.insert()
+
+
 # Branch Wise Store Filter
 @frappe.whitelist()
 def branch_wise_store_filter(branch):

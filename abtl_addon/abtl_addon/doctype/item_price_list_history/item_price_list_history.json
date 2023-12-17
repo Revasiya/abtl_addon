@@ -38,13 +38,13 @@
   },
   {
    "fieldname": "date",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
    "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-03 16:43:29.584863",
+ "modified": "2023-12-17 16:24:39.325728",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Item Price List History",

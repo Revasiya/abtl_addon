@@ -21,7 +21,7 @@
 //                                 ['name', 'in' , r.message]
 //                             ]
 //                         };
-//                         });  
+//                         }); 
 //                     }
 //                 }
                
@@ -30,88 +30,128 @@
 // 	}
 // });
 
-frappe.ui.form.on('Sales Order', {
-    refresh: function(frm){
-        if(cur_frm.doc.set_warehouse){
-            if(!cur_frm.custom_payment_type){
-                frm.set_df_property('custom_payment_type',  'reqd',1);    
+//Rate Not Less Def Rate
+frappe.ui.form.on("Sales Order Item",{
+    rate:function(frm,cdt,cdn){
+        var d = locals[cdt][cdn];
+        frappe.db.get_list('Item Price',{ 
+        fields:['price_list_rate'], 
+        filters:{ 
+            'item_code':d.item_code,
+            'selling':1,
+            'price_list':cur_frm.doc.selling_price_list,
+        } 
+        }).then(function(doc){ 
+            if(doc[0].price_list_rate >= d.rate){
+                frappe.model.set_value(cdt, cdn, 'rate', doc[0].price_list_rate);
+                frappe.model.set_value(cdt, cdn, 'amount', doc[0].price_list_rate*d.qty);
             }
             else{
-                frm.set_df_property('custom_payment_type',  'reqd',0); 
-            }
-            
-        }
-    },
-	custom_branch: function(frm) {
-	    cur_frm.set_value("set_warehouse","");
-		frappe.call({
-            method:"abtl_addon.abtl_addon.doctype.sales_order.branch_wise_store_filter",
-            args:{
-                branch:frm.doc.custom_branch,
-            },
-            callback:function(r){
-                console.log(r);
-                if (r.message) {
-                    cur_frm.set_query("set_warehouse", function(doc) {
-                        return{
-                            filters: [
-                                ['Warehouse', 'name', 'in' , r.message]
-                            ]
-                        };
-                    });  
-                       
-                }
-            }
-           
-        });
-	},
-	set_warehouse: function(frm) {
-	    cur_frm.set_value("custom_payment_type","");
-	    if(cur_frm.doc.set_warehouse){
-	        frm.set_df_property('custom_payment_type',  'reqd',1);
-	    }
-		frappe.call({
-            method:"abtl_addon.abtl_addon.doctype.sales_order.mode_of_payment_filter",
-            args:{
-                store:frm.doc.set_warehouse,
-            },
-            callback:function(r){
-                console.log(r);
-                if (r.message) {
-                    cur_frm.set_query("custom_payment_type", function(doc) {
-                        return{
-                            filters: [
-                                ['Mode of Payment', 'name', 'in' , r.message]
-                            ]
-                        };
-                    });        
-                }
+                frappe.model.set_value(cdt, cdn, 'amount', d.rate*d.qty);
             }
         });
-	},
-	custom_payment_type: function(frm) {
-	    if(!cur_frm.doc.custom_payment_type && cur_frm.doc.set_warehouse){
-	        frm.set_df_property('custom_payment_type',  'reqd',1);
-	        frappe.call({
-                method:"abtl_addon.abtl_addon.doctype.sales_order.mode_of_payment_filter",
-                args:{
-                    store:frm.doc.set_warehouse,
-                },
-                callback:function(r){
-                    console.log(r);
-                    if (r.message) {
-                        cur_frm.set_query("custom_payment_type", function(doc) {
-                            return{
-                                filters: [
-                                    ['Mode of Payment', 'name', 'in' , r.message]
-                                ]
-                            };
-                        });    
-                    }
-                }
+    }
+});
+
+frappe.ui.form.on('Sales Order', {
+    setup(frm) {
+        frm.set_df_property('custom_payment_type',  'hidden',1);
+	    frm.set_df_property('custom_sales_person',  'read_only',1);
+		if(frm.is_new()){
+		    frappe.db.get_list('User',{ 
+            fields:['sales_person','branch','store'], 
+            filters:{ 
+                'name':frappe.session.user_email
+            } 
+            }).then(function(doc){
+                console.log(doc) 
+                cur_frm.set_value("custom_sales_person",doc[0].sales_person);
+                cur_frm.set_value("custom_branch",doc[0].branch);
+                cur_frm.set_value("set_warehouse",doc[0].store);
             });
-	    }
+		}
 	},
+    // refresh: function(frm){
+    //     if(cur_frm.doc.set_warehouse){
+    //         if(!cur_frm.custom_payment_type){
+    //             frm.set_df_property('custom_payment_type',  'reqd',1);    
+    //         }
+    //         else{
+    //             frm.set_df_property('custom_payment_type',  'reqd',0); 
+    //         }
+            
+    //     }
+    // },
+	// custom_branch: function(frm) {
+	//     cur_frm.set_value("set_warehouse","");
+	// 	frappe.call({
+    //         method:"abtl_addon.abtl_addon.doctype.sales_order.branch_wise_store_filter",
+    //         args:{
+    //             branch:frm.doc.custom_branch,
+    //         },
+    //         callback:function(r){
+    //             console.log(r);
+    //             if (r.message) {
+    //                 cur_frm.set_query("set_warehouse", function(doc) {
+    //                     return{
+    //                         filters: [
+    //                             ['Warehouse', 'name', 'in' , r.message]
+    //                         ]
+    //                     };
+    //                 });  
+                       
+    //             }
+    //         }
+           
+    //     });
+	// },
+	// set_warehouse: function(frm) {
+	//     cur_frm.set_value("custom_payment_type","");
+	//     if(cur_frm.doc.set_warehouse){
+	//         frm.set_df_property('custom_payment_type',  'reqd',1);
+	//     }
+	// 	frappe.call({
+    //         method:"abtl_addon.abtl_addon.doctype.sales_order.mode_of_payment_filter",
+    //         args:{
+    //             store:frm.doc.set_warehouse,
+    //         },
+    //         callback:function(r){
+    //             console.log(r);
+    //             if (r.message) {
+    //                 cur_frm.set_query("custom_payment_type", function(doc) {
+    //                     return{
+    //                         filters: [
+    //                             ['Mode of Payment', 'name', 'in' , r.message]
+    //                         ]
+    //                     };
+    //                 });        
+    //             }
+    //         }
+    //     });
+	// },
+	// custom_payment_type: function(frm) {
+	//     if(!cur_frm.doc.custom_payment_type && cur_frm.doc.set_warehouse){
+	//         frm.set_df_property('custom_payment_type',  'reqd',1);
+	//         frappe.call({
+    //             method:"abtl_addon.abtl_addon.doctype.sales_order.mode_of_payment_filter",
+    //             args:{
+    //                 store:frm.doc.set_warehouse,
+    //             },
+    //             callback:function(r){
+    //                 console.log(r);
+    //                 if (r.message) {
+    //                     cur_frm.set_query("custom_payment_type", function(doc) {
+    //                         return{
+    //                             filters: [
+    //                                 ['Mode of Payment', 'name', 'in' , r.message]
+    //                             ]
+    //                         };
+    //                     });    
+    //                 }
+    //             }
+    //         });
+	//     }
+	// },
 });
 
 

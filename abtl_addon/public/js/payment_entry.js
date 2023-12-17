@@ -16,7 +16,6 @@
 // 	},
 // 	custom_fetch_outstanding_invoices: function(frm) {
 // // 		frm.events.get_outstanding_documents(frm, true, false);
-//         msgprint("Custom Fetch Outstanding Invoices");
 // 	}
 // });
 
