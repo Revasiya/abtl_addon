@@ -1,6 +1,34 @@
 // Copyright (c) 2023, envisionx Oman and contributors
 // For license information, please see license.txt
 
+//Item Qty Zero Not Show In Item Table
+// frappe.ui.form.on('Sales Order', {
+// 	set_warehouse: function(frm) {
+// 	    if(cur_frm.doc.set_warehouse){
+// 	        frappe.call({
+//                 method:"abtl_addon.abtl_addon.doctype.sales_order.item_zero_not_show",
+//                 args:{
+//                     warehouse:frm.doc.set_warehouse,
+//                 },
+//                 callback:function(r){
+//                     console.log(r);
+//                     cur_frm.clear_table("items");
+//                     if (r.message) {
+//                       cur_frm.set_query("item_code", "items", function(doc, cdt, cdn) {
+//                         var d = locals[cdt][cdn];
+//                         return{
+//                             filters: [
+//                                 ['name', 'in' , r.message]
+//                             ]
+//                         };
+//                         });  
+//                     }
+//                 }
+               
+//             });
+// 	    }    
+// 	}
+// });
 
 frappe.ui.form.on('Sales Order', {
     refresh: function(frm){
@@ -56,11 +84,9 @@ frappe.ui.form.on('Sales Order', {
                                 ['Mode of Payment', 'name', 'in' , r.message]
                             ]
                         };
-                    });  
-                       
+                    });        
                 }
             }
-           
         });
 	},
 	custom_payment_type: function(frm) {
@@ -80,14 +106,12 @@ frappe.ui.form.on('Sales Order', {
                                     ['Mode of Payment', 'name', 'in' , r.message]
                                 ]
                             };
-                        });  
-                           
+                        });    
                     }
                 }
             });
 	    }
 	},
-	
 });
 
 

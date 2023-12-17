@@ -1,12 +1,23 @@
 // Copyright (c) 2023, envisionx Oman and contributors
 // For license information, please see license.txt
 
-
 frappe.ui.form.on('Sales Invoice', {
-	//Mode Of Payment Button
+	onload(frm) {
+		if(frappe.session.user != "Administrator"){
+		    frm.set_df_property('set_posting_time',  'hidden', 1);
+		}
+	},
+    setup(frm) {
+		if(frappe.session.user != "Administrator"){
+		    frm.set_df_property('set_posting_time',  'hidden', 1);
+		}
+	},
     refresh: function(frm) {
+        if(frappe.session.user != "Administrator"){
+		    frm.set_df_property('set_posting_time',  'hidden', 1);
+		}
+        //Mode Of Payment Button
         if(!frm.is_new() && cur_frm.doc.status !== "Paid"){
-            
             //Cash Payment
             frm.add_custom_button(__('Cash Payment'), function(){
                 cur_frm.set_value("custom_payment_type","Cash")
