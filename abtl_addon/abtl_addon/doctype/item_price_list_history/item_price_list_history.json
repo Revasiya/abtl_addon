@@ -37,14 +37,16 @@
    "reqd": 1
   },
   {
+   "default": "Now",
    "fieldname": "date",
    "fieldtype": "Datetime",
+   "in_list_view": 1,
    "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 16:24:39.325728",
+ "modified": "2023-12-18 16:44:00.050619",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Item Price List History",

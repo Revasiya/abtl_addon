@@ -140,9 +140,13 @@ doc_events = {
 	"Item Price": {
 		"after_insert": "abtl_addon.abtl_addon.doctype.item_price.after_insert"
 	},
-    "User": {
+  "User": {
 		"after_insert": "abtl_addon.abtl_addon.doctype.user.after_insert"
-	}
+	},
+  # "Sales Order": {
+	# 	"validate": "abtl_addon.abtl_addon.doctype.sales_order.validate"
+	# },
+
 }
 
 

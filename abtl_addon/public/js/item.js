@@ -15,7 +15,6 @@ frappe.ui.form.on('Item', {
 				frm.set_df_property('custom_size','hidden', 1);
 				frm.set_df_property('custom_color','hidden', 1);
 			}
-		
 			//Brnad Filter
 			if(cur_frm.doc.brand){
 				frm.set_query("custom_item_model", function(frm) {
@@ -86,8 +85,6 @@ frappe.ui.form.on('Item', {
 	},
 	custom_speed(frm) {
 	    frm.set_df_property('custom_size','hidden', 0);
-	    
-
 			if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size && cur_frm.doc.custom_color){
 				var item_name3 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size+" "+cur_frm.doc.custom_color;
 				cur_frm.set_value("item_name", item_name3);
@@ -104,11 +101,9 @@ frappe.ui.form.on('Item', {
 				var item_name = cur_frm.doc.custom_item_model+" "+cur_frm.doc.custom_speed;
 				cur_frm.set_value("item_name", item_name);
 			}
-			
 	},
 	custom_size(frm) {
 	    frm.set_df_property('custom_color','hidden', 0);
-	    
 			if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size && cur_frm.doc.custom_color){
 				var item_name3 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size+" "+cur_frm.doc.custom_color;
 				cur_frm.set_value("item_name", item_name3);
@@ -126,11 +121,8 @@ frappe.ui.form.on('Item', {
 				cur_frm.set_value("item_name", item_name);
 				console.log(item_name);
 			}
-			
 	},
 	custom_color(frm) {
-	    
-
 			if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size && cur_frm.doc.custom_color){
 				var item_name3 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size+" "+cur_frm.doc.custom_color;
 				cur_frm.set_value("item_name", item_name3);
@@ -146,12 +138,9 @@ frappe.ui.form.on('Item', {
 			else{
 				var item_name = cur_frm.doc.custom_item_model+" "+cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size+" "+cur_frm.doc.custom_color;
 				cur_frm.set_value("item_name", item_name);
-			
 			}
-			
 	},
 });
-
 
 //Item Price List Auto Create
 
@@ -178,58 +167,7 @@ frappe.ui.form.on('Item', {
 			}); 
 		}
 	}
-    // item_rate: function(frm,cdt,cdn) {
-    //     var d = locals[cdt][cdn];
-    //     $.each(cur_frm.doc.custom_item_price, function(index, r){ 
-    //         frappe.db.get_list('Item Price',{ 
-    //             fields:['name'], 
-    //             filters:{ 
-    //                 'item_code':cur_frm.doc.name,
-    //                 'price_list':r.price_list,
-    //                 'selling':1
-    //             } 
-    //             }).then(function(doc){ 
-    //                 // console.log(doc);
-    //                 if(doc.length !== 0){
-    //                     frappe.db.get_list('Item Price List History',{ 
-    //                     fields:['name'], 
-    //                     filters:{ 
-    //                         'item_code':cur_frm.doc.name,
-    //                         'item_price_list':r.price_list,
-    //                         'item_rate':r.item_rate,
-    //                     } 
-    //                     }).then(function(iph){ 
-    //                         console.log(iph.length);
-    //                         if(iph.length === 0){
-    //                             frappe.db.insert({
-    //                                 "doctype":"Item Price List History",
-    //                                 "item_code":cur_frm.doc.name,
-    //                                 "item_price_list":r.price_list,
-    //                                 "item_rate":r.item_rate,
-    //                                 "date":frappe.datetime.nowdate()
-    //                             }); 
-    //                         }
-                            
-    //                     });
-                        
-    //                 }
-    //                 else{
-    //                     frappe.db.insert({
-    //                         "doctype":"Item Price",
-    //                         "item_code":cur_frm.doc.name,
-    //                         "price_list":r.price_list,
-    //                         "price_list_rate":r.item_rate,
-	// 						'selling':1
-    //                     });
-                        
-    //                 }
-    //         });
-            
-    //     });
-    //     frm.reload_doc();
-    // }
 });
-
 
 // frappe.ui.form.on('Item Price List', {
 //     item_rate: function(frm,cdt,cdn) {
@@ -259,8 +197,8 @@ frappe.ui.form.on('Item', {
 //                                     "doctype":"Item Price List History",
 //                                     "item_code":cur_frm.doc.name,
 //                                     "item_price_list":r.price_list,
-//                                     "item_rate":r.item_rate,
-//                                     "date":frappe.datetime.nowdate()
+//                                     "item_rate":r.item_rate
+//                                     // "date":frappe.datetime.nowdate()
 //                                 }); 
 //                             }
                             
@@ -283,3 +221,4 @@ frappe.ui.form.on('Item', {
 //         frm.reload_doc();
 //     }
 // });
+

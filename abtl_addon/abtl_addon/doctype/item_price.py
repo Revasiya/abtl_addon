@@ -8,7 +8,7 @@ def after_insert(doc,method):
     "doctype": "Item Price List History",
     "item_code":doc.item_code,
     "item_price_list":doc.price_list,
-    "item_rate":doc.price_list_rate,
-    "date":frappe.utils.nowdate()
+    "item_rate":doc.price_list_rate
+    # "date":frappe.utils.now()
 	})
     item_price_list.insert()
