@@ -16,13 +16,19 @@
   "column_break_tlph7",
   "target_warehouse",
   "item_section",
-  "good_transfer_item",
+  "items",
+  "goods_recevied_deatils_section",
+  "driver_name",
+  "vehical_no",
+  "column_break_cnokz",
+  "good_recever_name",
   "more_info_section",
   "status",
   "create_by",
   "column_break_i29pq",
-  "stock_entry_link",
-  "amended_from"
+  "amended_from",
+  "good_transfer_reference_number",
+  "good_received_reference_number"
  ],
  "fields": [
   {
@@ -104,28 +110,56 @@
    "label": "Item"
   },
   {
-   "fieldname": "good_transfer_item",
-   "fieldtype": "Table",
-   "label": "Good Transfer Item",
-   "options": "Good Transfer Item"
-  },
-  {
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
    "options": "GT-.YY.-.MM.-"
   },
   {
-   "fieldname": "stock_entry_link",
+   "fieldname": "goods_recevied_deatils_section",
+   "fieldtype": "Section Break",
+   "label": "Others Deatils"
+  },
+  {
+   "fieldname": "good_recever_name",
+   "fieldtype": "Data",
+   "label": "Good Recever Name"
+  },
+  {
+   "fieldname": "vehical_no",
+   "fieldtype": "Data",
+   "label": "Vehical No"
+  },
+  {
+   "fieldname": "column_break_cnokz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "items",
    "fieldtype": "Table",
-   "label": "Stock Entry Link",
-   "options": "Stock Entry Links"
+   "label": "Good Transfer Item",
+   "options": "Good Transfer Item"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "good_transfer_reference_number",
+   "fieldtype": "Data",
+   "label": "Good Transfer Reference Number"
+  },
+  {
+   "fieldname": "good_received_reference_number",
+   "fieldtype": "Data",
+   "label": "Good Received Reference Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-19 18:27:32.635587",
+ "modified": "2023-12-20 17:22:11.287240",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Good Transfer",

@@ -17,7 +17,8 @@
   "quantity_section",
   "qty",
   "column_break_gu6vk",
-  "stock_uom"
+  "stock_uom",
+  "actual_qty"
  ],
  "fields": [
   {
@@ -43,7 +44,6 @@
    "fetch_from": "item_code.item_group",
    "fieldname": "item_group",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Item Group",
    "options": "Item Group"
   },
@@ -92,14 +92,20 @@
   {
    "fieldname": "imei_no",
    "fieldtype": "Small Text",
-   "label": "IMEI No",
-   "reqd": 1
+   "label": "IMEI No"
+  },
+  {
+   "fieldname": "actual_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Actual Qty",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-12-19 18:01:26.878945",
+ "modified": "2023-12-21 17:36:02.973227",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Good Transfer Item",

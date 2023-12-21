@@ -143,9 +143,12 @@ doc_events = {
   "User": {
 		"after_insert": "abtl_addon.abtl_addon.doctype.user.after_insert"
 	},
-  # "Sales Order": {
-	# 	"validate": "abtl_addon.abtl_addon.doctype.sales_order.validate"
-	# },
+  "Stock Entry": {
+		"on_submit": "abtl_addon.abtl_addon.doctype.stock_entry.on_submit"
+	},
+  "Sales Order": {
+		"validate": "abtl_addon.abtl_addon.doctype.sales_order.validate"
+	},
 
 }
 

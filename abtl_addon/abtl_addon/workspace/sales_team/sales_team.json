@@ -1,0 +1,105 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"NAPnILs5Im\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Sales Order</b></span>\",\"col\":6}},{\"id\":\"_fHghHR1vj\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Payment Entry</b></span>\",\"col\":6}},{\"id\":\"kx5M-OH1V5\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sales Order List\",\"col\":6}},{\"id\":\"o9VBcdmeEz\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Payment Entry List\",\"col\":6}},{\"id\":\"fi6qe-1vDi\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "creation": "2023-12-17 11:14:38.130097",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "money-coins-1",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Sales Team",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 5,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Dues Collection Report",
+   "link_count": 0,
+   "link_to": "Dues Collection Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Report",
+   "link_count": 0,
+   "link_to": "Sales Person Wise Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Payment Collection",
+   "link_count": 0,
+   "link_to": "Sales Person Wise Payment Collection",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Stock Qty Balance",
+   "link_count": 0,
+   "link_to": "Stock Qty Balance",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Item Balance (Simple)",
+   "link_count": 0,
+   "link_to": "Item Balance (Simple)",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-12-21 13:00:04.653292",
+ "modified_by": "Administrator",
+ "module": "Abtl Addon",
+ "name": "Sales Team",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Sales Order",
+   "label": "Sales Order List",
+   "quick_list_filter": "[[\"Sales Order\",\"status\",\"=\",\"Draft\",false]]"
+  },
+  {
+   "document_type": "Payment Entry",
+   "label": "Payment Entry List",
+   "quick_list_filter": "[[\"Payment Entry\",\"status\",\"=\",\"Draft\",false]]"
+  }
+ ],
+ "roles": [
+  {
+   "role": "Sales Team"
+  },
+  {
+   "role": "Sales User"
+  }
+ ],
+ "sequence_id": 40.0,
+ "shortcuts": [],
+ "title": "Sales Team"
+}
