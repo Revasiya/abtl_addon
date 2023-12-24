@@ -1,6 +1,6 @@
 ## Abtl Addon
 
-ABTL Customization For Mobile Dealer In Oman
+ABTL Addon
 
 #### License
 
