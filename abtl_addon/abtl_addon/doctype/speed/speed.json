@@ -12,14 +12,17 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "speed",
    "fieldtype": "Data",
-   "label": "Speed"
+   "in_list_view": 1,
+   "label": "Speed",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-03 16:43:30.220305",
+ "modified": "2023-12-24 16:52:26.397078",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Speed",
@@ -39,6 +42,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

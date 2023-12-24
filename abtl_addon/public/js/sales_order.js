@@ -82,29 +82,29 @@ frappe.ui.form.on('Sales Order', {
             
     //     }
     // },
-	// custom_branch: function(frm) {
-	//     cur_frm.set_value("set_warehouse","");
-	// 	frappe.call({
-    //         method:"abtl_addon.abtl_addon.doctype.sales_order.branch_wise_store_filter",
-    //         args:{
-    //             branch:frm.doc.custom_branch,
-    //         },
-    //         callback:function(r){
-    //             console.log(r);
-    //             if (r.message) {
-    //                 cur_frm.set_query("set_warehouse", function(doc) {
-    //                     return{
-    //                         filters: [
-    //                             ['Warehouse', 'name', 'in' , r.message]
-    //                         ]
-    //                     };
-    //                 });  
+	custom_branch: function(frm) {
+	    cur_frm.set_value("set_warehouse","");
+		frappe.call({
+            method:"abtl_addon.abtl_addon.doctype.sales_order.branch_wise_store_filter",
+            args:{
+                branch:frm.doc.custom_branch,
+            },
+            callback:function(r){
+                console.log(r);
+                if (r.message) {
+                    cur_frm.set_query("set_warehouse", function(doc) {
+                        return{
+                            filters: [
+                                ['Warehouse', 'name', 'in' , r.message]
+                            ]
+                        };
+                    });  
                        
-    //             }
-    //         }
+                }
+            }
            
-    //     });
-	// },
+        });
+	},
 	// set_warehouse: function(frm) {
 	//     cur_frm.set_value("custom_payment_type","");
 	//     if(cur_frm.doc.set_warehouse){

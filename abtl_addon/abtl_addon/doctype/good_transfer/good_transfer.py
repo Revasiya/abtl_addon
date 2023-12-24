@@ -26,6 +26,7 @@ class GoodTransfer(Document):
 						'description':i.description,
 						'qty':i.qty,
 						'uom':i.stock_uom,
+						'serial_no':i.imei_no,
 					})  
 				else:
 					frappe.msgprint("Please Set IMEI No")
@@ -51,6 +52,7 @@ class GoodTransfer(Document):
 					'description':i.description,
 					'qty':i.qty,
 					'uom':i.stock_uom,
+					'serial_no':i.imei_no,
 				})  
 			stock_entry_receiv.insert()
 			stock_entry_receiv.submit()

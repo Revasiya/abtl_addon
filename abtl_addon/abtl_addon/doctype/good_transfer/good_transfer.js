@@ -14,6 +14,23 @@ frappe.ui.form.on("Good Transfer","onload", function(frm, cdt, cdn) {
 
 
 frappe.ui.form.on('Good Transfer', {
+    setup: function(frm) {
+        frm.set_query("source_warehouse", function() {
+            return {
+                filters: {
+                    'is_group': 0,
+                }
+            };
+        });
+        
+        frm.set_query("target_warehouse", function() {
+            return {
+                filters: {
+                    'is_group': 0
+                }
+            };
+        });
+    },
 	onload: function(frm) {
 	    if(cur_frm.doc.source_warehouse){
 	        frappe.call({
@@ -67,3 +84,40 @@ frappe.ui.form.on('Good Transfer', {
 	}
 });
 
+
+frappe.ui.form.on('Good Transfer Item', {
+	item_code:function(frm,cdt,cdn) {
+	    var d = locals[cdt][cdn];
+	    if(cur_frm.doc.source_warehouse){
+    	    frappe.call({
+            method:"abtl_addon.abtl_addon.doctype.good_transfer.good_transfer.actual_qty_show",
+            args:{
+                'item_code': d.item_code,
+				'warehouse': cur_frm.doc.source_warehouse
+            },
+            callback:function(r){
+                console.log(r);
+                if (r.message) {
+                    var d = locals[cdt][cdn];
+                    frappe.model.set_value(d.doctype, d.name, "actual_qty", r.message[0].actual_qty);
+                }
+            }
+            });
+	    }
+	    else{
+	        frappe.throw("Please Select Source Warehouse");
+	    }
+	},
+	qty:function(frm,cdt,cdn) {
+	    var d = locals[cdt][cdn];
+	    if(d.actual_qty < d.qty){
+	        frappe.throw("Please Enter Less Than Actual Qty!");
+	    }
+	},
+// 	imei_no:function(frm,cdt,cdn) {
+// 	    var d = locals[cdt][cdn];
+// 	    varn = d.imei_no;
+// 	    var ty = parseInt(n);
+// 	    console.log(ty);
+// 	}
+});

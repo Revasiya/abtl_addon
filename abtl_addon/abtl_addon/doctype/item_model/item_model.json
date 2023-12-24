@@ -13,20 +13,26 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "brand",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Brand",
-   "options": "Brand"
+   "options": "Brand",
+   "reqd": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "model",
    "fieldtype": "Data",
-   "label": "Model"
+   "in_list_view": 1,
+   "label": "Model",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-03 16:43:30.662810",
+ "modified": "2023-12-24 16:52:51.023965",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Item Model",
@@ -46,6 +52,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

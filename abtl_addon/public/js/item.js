@@ -42,9 +42,14 @@ frappe.ui.form.on('Item', {
 		
 	 },
 	 item_group: function(frm) {
+		if(cur_frm.doc.item_group == "Mobile"){
+			cur_frm.set_value("has_serial_no",1);
+		}
 		if(cur_frm.doc.item_group == "Accessories"){
 			frm.set_df_property('custom_size','hidden', 1);
 			frm.set_df_property('custom_speed','hidden', 1);
+
+			cur_frm.set_value("has_serial_no",0);
 		}
 		else{
 			frm.set_df_property('custom_size','hidden', 0);
@@ -71,7 +76,7 @@ frappe.ui.form.on('Item', {
 				cur_frm.set_value("item_name", item_name3);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size){
-				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+""+cur_frm.doc.custom_size;
+				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size;
 				cur_frm.set_value("item_name", item_name2);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed){
@@ -90,7 +95,7 @@ frappe.ui.form.on('Item', {
 				cur_frm.set_value("item_name", item_name3);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size){
-				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+""+cur_frm.doc.custom_size;
+				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size;
 				cur_frm.set_value("item_name", item_name2);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed){
@@ -109,7 +114,7 @@ frappe.ui.form.on('Item', {
 				cur_frm.set_value("item_name", item_name3);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size){
-				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+""+cur_frm.doc.custom_size;
+				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size;
 				cur_frm.set_value("item_name", item_name2);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed){
@@ -128,7 +133,7 @@ frappe.ui.form.on('Item', {
 				cur_frm.set_value("item_name", item_name3);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed && cur_frm.doc.custom_size){
-				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+""+cur_frm.doc.custom_size;
+				var item_name2 = cur_frm.doc.custom_item_model+" "+ cur_frm.doc.custom_speed+" "+cur_frm.doc.custom_size;
 				cur_frm.set_value("item_name", item_name2);
 			}
 			else if(cur_frm.doc.custom_item_model && cur_frm.doc.custom_speed){
