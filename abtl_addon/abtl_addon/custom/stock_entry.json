@@ -105,7 +105,7 @@
    "name": "Stock Entry-custom_good_transfer_no",
    "no_copy": 0,
    "non_negative": 0,
-   "options": "Good Transfer",
+   "options": "Goods Transfer",
    "owner": "Administrator",
    "permlevel": 0,
    "precision": "",

@@ -7,14 +7,14 @@ import frappe
 def on_submit(doc,method):
     if doc.custom_good_transfer_no:
         # Set Good Transfer
-        good_transfer_reference_number, good_received_reference_number = frappe.db.get_value('Good Transfer', doc.custom_good_transfer_no, ['good_transfer_reference_number', 'good_received_reference_number'])
+        good_transfer_reference_number, good_received_reference_number = frappe.db.get_value('Goods Transfer', doc.custom_good_transfer_no, ['good_transfer_reference_number', 'good_received_reference_number'])
         if not good_transfer_reference_number:
-            frappe.db.set_value('Good Transfer', doc.custom_good_transfer_no, {
+            frappe.db.set_value('Goods Transfer', doc.custom_good_transfer_no, {
                 'good_transfer_reference_number': doc.name
             })
 
         if not good_received_reference_number:
-            frappe.db.set_value('Good Transfer', doc.custom_good_transfer_no, {
+            frappe.db.set_value('Goods Transfer', doc.custom_good_transfer_no, {
                 'good_received_reference_number': doc.name
             })
 
