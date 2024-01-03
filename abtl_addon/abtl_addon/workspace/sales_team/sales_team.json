@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"NAPnILs5Im\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Sales Order</b></span>\",\"col\":6}},{\"id\":\"_fHghHR1vj\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Payment Entry</b></span>\",\"col\":6}},{\"id\":\"kx5M-OH1V5\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sales Order List\",\"col\":6}},{\"id\":\"o9VBcdmeEz\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Payment Entry List\",\"col\":6}},{\"id\":\"fi6qe-1vDi\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"NAPnILs5Im\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Sales Order</b></span>\",\"col\":6}},{\"id\":\"_fHghHR1vj\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Payment Entry</b></span>\",\"col\":6}},{\"id\":\"kx5M-OH1V5\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sales Order List\",\"col\":6}},{\"id\":\"o9VBcdmeEz\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Payment Entry List\",\"col\":6}},{\"id\":\"dSXyNiC3ei\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Delivery Note\",\"col\":6}},{\"id\":\"jytsiXrLC4\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Sales Invoice\",\"col\":6}},{\"id\":\"fi6qe-1vDi\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2023-12-17 11:14:38.130097",
  "custom_blocks": [],
  "docstatus": 0,
@@ -71,7 +71,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-12-21 13:00:04.653292",
+ "modified": "2024-01-02 16:05:23.895143",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sales Team",
@@ -84,6 +84,16 @@
    "document_type": "Sales Order",
    "label": "Sales Order List",
    "quick_list_filter": "[[\"Sales Order\",\"status\",\"=\",\"Draft\",false]]"
+  },
+  {
+   "document_type": "Sales Invoice",
+   "label": "Sales Invoice",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Delivery Note",
+   "label": "Delivery Note",
+   "quick_list_filter": "[]"
   },
   {
    "document_type": "Payment Entry",
@@ -99,7 +109,7 @@
    "role": "Sales User"
   }
  ],
- "sequence_id": 40.0,
+ "sequence_id": 15.0,
  "shortcuts": [],
  "title": "Sales Team"
 }

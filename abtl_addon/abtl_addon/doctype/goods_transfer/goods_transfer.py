@@ -19,17 +19,14 @@ class GoodsTransfer(Document):
 			})
 			# Item
 			for i in self.items:
-				if i.imei_no:
-					stock_entry.append("items",{
-						'item_code':i.item_code,
-						'item_name':i.item_name,
-						'description':i.description,
-						'qty':i.qty,
-						'uom':i.stock_uom,
-						'serial_no':i.imei_no,
-					})  
-				else:
-					frappe.msgprint("Please Set IMEI No")
+				stock_entry.append("items",{
+					'item_code':i.item_code,
+					'item_name':i.item_name,
+					'description':i.description,
+					'qty':i.qty,
+					'uom':i.stock_uom,
+					'serial_no':i.imei_no,
+				})  
 			stock_entry.insert()
 			stock_entry.submit()
 			frappe.msgprint("Stock Entry Transfer Created Succesfull")

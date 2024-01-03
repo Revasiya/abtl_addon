@@ -6,6 +6,17 @@ import frappe
 
 
 def validate(doc,method):
+    create_DN(doc),
+    items_zero_after_validate(doc)
+
+
+def items_zero_after_validate(doc):
+    for i in doc.items:
+        if i.qty == 0:
+            frappe.throw(" This Item Qty is Zero " + "<b style='color:red;'>"+ i.item_code + "</b>")
+
+
+def create_DN(doc):
     if doc.workflow_state == "Approved":
         dn = frappe.get_doc({
             "doctype": "Delivery Note",
@@ -108,11 +119,7 @@ def validate(doc,method):
                 'dont_recompute_tax':t.dont_recompute_tax
             })    
         dn.insert()
-
-        # Fetch Latest Delivery Note
-        dn_it = frappe.get_list("Delivery Note Item",filters={'against_sales_order': doc.name},fields=['parent'],page_length=1)
-        for dn_no in dn_it:
-            frappe.msgprint("Create New Delivery Note Successfully " +':- '+ frappe.bold(dn_no.parent))
+        frappe.msgprint("Create New Delivery Note Successfully")
         
 
 # Branch Wise Store Filter

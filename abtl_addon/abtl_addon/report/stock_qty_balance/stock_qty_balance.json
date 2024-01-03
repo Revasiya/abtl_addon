@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "json": "{\"columns\":[{\"label\":\"Item Code\",\"fieldname\":\"item_code\",\"fieldtype\":\"Link\",\"options\":\"Item\",\"width\":200,\"id\":\"item_code\",\"name\":\"Item Code\",\"editable\":false,\"compareValue\":null},{\"label\":\"Item Name\",\"fieldname\":\"item_name\",\"fieldtype\":\"Data\",\"width\":200,\"id\":\"item_name\",\"name\":\"Item Name\",\"editable\":false,\"compareValue\":null},{\"label\":\"Stock Qty\",\"fieldname\":\"stock_qty\",\"fieldtype\":\"Float\",\"width\":150,\"id\":\"stock_qty\",\"name\":\"Stock Qty\",\"editable\":false,\"compareValue\":null}],\"filters\":{\"company\":\"ABTL\",\"warehouse\":\"1000-Head Office - A\"}}",
- "modified": "2023-12-24 19:46:09.224914",
+ "modified": "2023-12-31 12:43:09.611434",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Stock Qty Balance",
@@ -23,6 +23,9 @@
  "roles": [
   {
    "role": "Store Team"
+  },
+  {
+   "role": "Sales Team"
   }
  ]
 }
