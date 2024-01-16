@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2024-01-10 11:52:12.328267",
+ "modified": "2024-01-14 11:30:17.140102",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Avenues Mall Available Stock",
@@ -20,19 +20,7 @@
  "report_type": "Script Report",
  "roles": [
   {
-   "role": "Stock User"
-  },
-  {
-   "role": "Purchase User"
-  },
-  {
-   "role": "Sales User"
-  },
-  {
-   "role": "Sales Team"
-  },
-  {
-   "role": "Store Team"
+   "role": "Avenues Mall Report"
   }
  ]
 }

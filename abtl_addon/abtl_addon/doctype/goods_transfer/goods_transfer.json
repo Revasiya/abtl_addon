@@ -26,8 +26,8 @@
   "status",
   "create_by",
   "column_break_i29pq",
-  "good_transfer_reference_number",
-  "good_received_reference_number",
+  "gt_reference_number",
+  "gr_reference_number",
   "amended_from"
  ],
  "fields": [
@@ -138,18 +138,6 @@
    "label": "Driver Name"
   },
   {
-   "fieldname": "good_transfer_reference_number",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Good Transfer Reference Number"
-  },
-  {
-   "fieldname": "good_received_reference_number",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Good Received Reference Number"
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -157,12 +145,26 @@
    "options": "Goods Transfer",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gt_reference_number",
+   "fieldtype": "Link",
+   "label": "GT Reference Number",
+   "options": "Stock Entry"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gr_reference_number",
+   "fieldtype": "Link",
+   "label": "GR Reference Number",
+   "options": "Stock Entry"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-11 12:35:20.004923",
+ "modified": "2024-01-16 16:53:59.758055",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Goods Transfer",

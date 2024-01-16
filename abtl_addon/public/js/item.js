@@ -4,6 +4,7 @@
 // Item Name Creted
 frappe.ui.form.on('Item', {
 	refresh(frm) {
+		frm.set_df_property('naming_series','hidden', 1);
 		if(!cur_frm.is_new()){
 			// frm.set_df_property('item_code','hidden', 0);
 			frm.set_df_property('include_item_in_manufacturing','hidden', 1);
@@ -42,9 +43,21 @@ frappe.ui.form.on('Item', {
 		
 	 },
 	 item_group: function(frm) {
-		if(cur_frm.doc.item_group == "Mobile"){
-			cur_frm.set_value("has_serial_no",1);
-		}
+		frappe.db.get_list('Item Group',{ 
+			fields:['custom_has_serial_no'], 
+			filters:{ 
+				'name':cur_frm.doc.item_group,
+			} 
+		}).then(function(r){ 
+			// console.log(r[0].custom_has_serial_no);
+			if(r[0].custom_has_serial_no == 1){
+				cur_frm.set_value("has_serial_no",1);
+			}
+			else{
+				cur_frm.set_value("has_serial_no",0);
+			}
+		});
+		
 		if(cur_frm.doc.item_group == "Accessories"){
 			frm.set_df_property('custom_size','hidden', 1);
 			frm.set_df_property('custom_speed','hidden', 1);

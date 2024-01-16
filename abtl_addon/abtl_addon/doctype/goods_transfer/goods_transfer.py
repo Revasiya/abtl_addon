@@ -12,7 +12,7 @@ class GoodsTransfer(Document):
 		if self.status == "Goods In Transit":
 			stock_entry = frappe.get_doc({
 				"doctype": "Stock Entry",
-				"custom_goods_transfer_no":self.name,
+				"custom_good_transfer_no":self.name,
 				"stock_entry_type": "Material Transfer",
 				"from_warehouse":self.source_warehouse,
 				"to_warehouse":"9999-Goods In Transit - A",
@@ -21,6 +21,8 @@ class GoodsTransfer(Document):
 			for i in self.items:
 				stock_entry.append("items",{
 					'item_code':i.item_code,
+					's_warehouse':self.source_warehouse,
+					't_warehouse':'9999-Goods In Transit - A',
 					'item_name':i.item_name,
 					'description':i.description,
 					'qty':i.qty,
@@ -28,7 +30,7 @@ class GoodsTransfer(Document):
 					'serial_no':i.imei_no,
 				})  
 			stock_entry.insert()
-			# stock_entry.submit()
+			stock_entry.submit()
 			frappe.msgprint("Stock Entry Transfer Created Succesfull")
 			
 	def on_change(self):
@@ -36,7 +38,7 @@ class GoodsTransfer(Document):
 		if self.status == "Goods Received":
 			stock_entry_receiv = frappe.get_doc({
 				"doctype": "Stock Entry",
-				"custom_goods_transfer_no":self.name,
+				"custom_good_transfer_no":self.name,
 				"stock_entry_type": "Material Transfer",
 				"from_warehouse":"9999-Goods In Transit - A",
 				"to_warehouse":self.target_warehouse,
@@ -45,6 +47,8 @@ class GoodsTransfer(Document):
 			for i in self.items:
 				stock_entry_receiv.append("items",{
 					'item_code':i.item_code,
+					's_warehouse':'9999-Goods In Transit - A',
+					't_warehouse':self.target_warehouse,
 					'item_name':i.item_name,
 					'description':i.description,
 					'qty':i.qty,
@@ -52,7 +56,7 @@ class GoodsTransfer(Document):
 					'serial_no':i.imei_no,
 				})  
 			stock_entry_receiv.insert()
-			# stock_entry_receiv.submit()
+			stock_entry_receiv.submit()
 			frappe.msgprint("Goods Received Succesfull")
 		
 

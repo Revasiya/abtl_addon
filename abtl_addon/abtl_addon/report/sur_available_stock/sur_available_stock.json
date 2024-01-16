@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2024-01-10 12:03:19.577636",
+ "modified": "2024-01-14 11:30:48.744155",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sur Available Stock",
@@ -20,19 +20,7 @@
  "report_type": "Script Report",
  "roles": [
   {
-   "role": "Stock User"
-  },
-  {
-   "role": "Purchase User"
-  },
-  {
-   "role": "Sales User"
-  },
-  {
-   "role": "Sales Team"
-  },
-  {
-   "role": "Store Team"
+   "role": "Sur Report"
   }
  ]
 }

@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2024-01-09 20:11:24.963507",
+ "modified": "2024-01-14 11:29:09.859822",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sohar Available Stock",
@@ -20,19 +20,7 @@
  "report_type": "Script Report",
  "roles": [
   {
-   "role": "Stock User"
-  },
-  {
-   "role": "Purchase User"
-  },
-  {
-   "role": "Sales User"
-  },
-  {
-   "role": "Sales Team"
-  },
-  {
-   "role": "Store Team"
+   "role": "Sohar Report"
   }
  ]
 }

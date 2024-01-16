@@ -13,9 +13,12 @@ def execute(filters=None):
 
 def get_data(conditions,filters):
         
-		
+		# SELECT item_code,warehouse,actual_qty,valuation_rate FROM `tabBin` Where warehouse = %(warehouse)s
 		sohar = frappe.db.sql(""" 
-		SELECT item_code,warehouse,actual_qty,valuation_rate FROM `tabBin` Where warehouse = %(warehouse)s
+		SELECT bin.item_code,it.item_name,bin.warehouse,bin.actual_qty,bin.valuation_rate FROM `tabBin` as bin
+		LEFT JOIN `tabItem` as it ON 
+		bin.item_code = it.name Where warehouse = %(warehouse)s
+						 
 		
 		{conditions}
  		""".format(conditions=conditions), filters, as_dict=1)
@@ -36,7 +39,15 @@ def get_columns(filters):
 			"fieldname": "item_code",
 			"fieldtype": "Link",
 			"options": "Item",
-			"width": 200
+			"width": 260
+		},
+
+			
+		{
+			"label": ("Item Name"),
+			"fieldname": "item_name",
+			"fieldtype": "Data",
+			"width": 400
 		},
 
 		{
@@ -50,13 +61,13 @@ def get_columns(filters):
 			"label": ("Actual Qty"),
 			"fieldname": "actual_qty",
 			"fieldtype": "Float",
-			"width": 200
+			"width": 150
 		},
 		{
 			"label": ("Valuation Rate"),
 			"fieldname": "valuation_rate",
 			"fieldtype": "Float",
-			"width": 200
+			"width": 180
 		},
 		
         
