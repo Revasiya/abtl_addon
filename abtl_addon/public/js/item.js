@@ -184,6 +184,21 @@ frappe.ui.form.on('Item', {
 				cur_frm.save();
 			}); 
 		}
+
+		//Avg Price Fetch And Save In Field
+		if(!cur_frm.is_new()){
+            frappe.db.get_list('Bin',{ 
+            fields:['valuation_rate'], 
+            filters:{ 
+                'item_code':cur_frm.doc.item_code,
+                'warehouse':"1-Muscat Store 1 - A"
+            } 
+            }).then(function(doc){ 
+                // console.log(doc[0].valuation_rate);
+				cur_frm.set_value("custom_avg_price", doc[0].valuation_rate);
+				cur_frm.save();
+            });
+        }
 	}
 });
 

@@ -154,7 +154,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 3,
+   "link_count": 2,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -171,16 +171,6 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "Sales Report",
-   "link_count": 0,
-   "link_to": "Sales Person Wise Sales Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
    "label": "Payment Collection",
    "link_count": 0,
    "link_to": "Payment Collection (Simple)",
@@ -189,7 +179,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-01-16 15:51:20.709105",
+ "modified": "2024-01-22 17:14:28.065221",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sales Team",
