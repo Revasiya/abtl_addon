@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "format:PC-{YY}-{###}",
- "creation": "2024-01-27 20:20:09.809999",
+ "creation": "2024-02-03 23:20:17.944769",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -11,9 +11,15 @@
   "column_break_polgg",
   "posting_date",
   "company",
-  "amended_from",
   "section_break_bwaip",
   "accounting",
+  "section_break_njss3",
+  "column_break_tlpkz",
+  "total_debit",
+  "column_break_iqzv4",
+  "total_credit",
+  "column_break_bocz0",
+  "difference",
   "section_break_6b0eg",
   "remarks",
   "column_break_sselu",
@@ -21,23 +27,14 @@
  ],
  "fields": [
   {
+   "fieldname": "column_break_polgg",
+   "fieldtype": "Column Break"
+  },
+  {
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Petty Cash",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "column_break_polgg",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "company",
@@ -54,6 +51,34 @@
    "fieldtype": "Table",
    "label": "Accounting Entries",
    "options": "Petty Cash Account"
+  },
+  {
+   "fieldname": "column_break_tlpkz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_debit",
+   "fieldtype": "Currency",
+   "label": "Total Debit",
+   "no_copy": 1,
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_credit",
+   "fieldtype": "Currency",
+   "label": "Total Credit",
+   "no_copy": 1,
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "difference",
+   "fieldtype": "Currency",
+   "label": "Difference  (Dr - Cr)",
+   "no_copy": 1,
+   "options": "Company:company:default_currency",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_6b0eg",
@@ -73,12 +98,24 @@
    "fieldtype": "Link",
    "label": "Mode of Payment",
    "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "section_break_njss3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_iqzv4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bocz0",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-01-27 21:10:41.666825",
+ "modified": "2024-02-04 10:54:48.766085",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Petty Cash",

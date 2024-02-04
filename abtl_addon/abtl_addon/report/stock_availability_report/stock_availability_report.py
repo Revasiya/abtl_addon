@@ -53,16 +53,16 @@ def get_columns(filters):
     # Add columns for valuation rate and total stock quantity
     columns.extend([
         {
-            "label": _("Valuation Rate (Finished Goods)"),
-            "fieldname": "valuation_rate_finished_goods",
-            "fieldtype": "Currency",
-            "width": 130
-        },
-        {
             "label": _("Total Stock Qty"),
             "fieldname": "total_stock_qty",
             "fieldtype": "Float",
             "width": 120
+        },
+		{
+            "label": _("Valuation Rate (Finished Goods)"),
+            "fieldname": "valuation_rate_finished_goods",
+            "fieldtype": "Currency",
+            "width": 130
         }
     ])
 

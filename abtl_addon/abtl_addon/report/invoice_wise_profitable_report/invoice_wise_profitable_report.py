@@ -29,11 +29,17 @@ def get_columns(filters):
             "width": 140
         },
         {
-            "label": _("Customer Name"),
+            "label": _("Customer"),
             "fieldname": "customer",
             "fieldtype": "Link",
             "options": "Customer",
             "width": 140
+        },
+         {
+            "label": _("Customer Name"),
+            "fieldname": "customer_name",
+            "fieldtype": "Data",
+            "width": 200
         },
         {
             "label": _("Inv Amount without VAT"),
@@ -45,7 +51,7 @@ def get_columns(filters):
             "label": _("VAT"),
             "fieldname": "total_taxes_and_charges",
             "fieldtype": "Float",
-            "width": 140
+            "width": 80
         },
         {
             "label": _("Total Amt of Inv"),
@@ -69,7 +75,7 @@ def get_columns(filters):
             "label": _("Percentage"),
             "fieldname": "percentage",
             "fieldtype": "Data",
-            "width": 140
+            "width": 120
         },
     ]
     
@@ -88,26 +94,26 @@ def get_conditions(filters):
 # Fetch data from the database using SQL query
 def get_data(conditions, filters):
     data = frappe.db.sql("""
-        SELECT si.name, si.customer,si.posting_date, si.total, si.total_taxes_and_charges, si.grand_total,
+        SELECT si.name, si.customer,si.customer_name,si.posting_date, si.total, si.total_taxes_and_charges, si.grand_total,
         COALESCE(SUM(item.valuation_rate * sii.qty), 0) as total_valuation_rate
         FROM `tabSales Invoice` si 
         LEFT JOIN `tabSales Invoice Item` sii ON sii.parent = si.name
         LEFT JOIN `tabBin` item ON item.item_code = sii.item_code and item.warehouse = "1-Muscat Store 1 - A"
         WHERE 1=1 {conditions}
-        GROUP BY si.name, si.customer, si.posting_date, si.total, si.total_taxes_and_charges, si.grand_total
+        GROUP BY si.name, si.customer, si.posting_date, si.total, si.total_taxes_and_charges, si.total
     """.format(conditions=conditions), filters, as_dict=1)
 
     for row in data:
         if row['total_valuation_rate'] == 0:
             row['gross_profit_or_loss'] = 0.0
         else:
-            row['gross_profit_or_loss'] = row['grand_total'] - row['total_valuation_rate']
+            row['gross_profit_or_loss'] = row['total'] - row['total_valuation_rate']
             
 
         if row['total_valuation_rate'] == 0:
             row['percentage'] = 0.0
         else:
-            per = row['grand_total'] - row['total_valuation_rate']  
+            per = row['total'] - row['total_valuation_rate'] 
             row['percentage'] = per / row['total_valuation_rate'] * 100
             
 

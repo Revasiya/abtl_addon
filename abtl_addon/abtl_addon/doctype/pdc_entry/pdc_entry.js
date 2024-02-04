@@ -1,6 +1,12 @@
 // Copyright (c) 2024, envisionx Oman and contributors
 // For license information, please see license.txt
 
+frappe.ui.form.on('PDC Entry', {
+	// refresh: function(frm) {
+
+	// }
+});
+
 frappe.ui.form.on('Petty Cash', {
 	before_save: function(frm,cdt,cdn) {
 		var d = locals[cdt][cdn];
