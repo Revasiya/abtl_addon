@@ -1,0 +1,197 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-12-19 17:09:29.632874",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "column_break_hkrvq",
+  "date_time",
+  "warehouse_details_section",
+  "source_warehouse",
+  "column_break_tlph7",
+  "target_warehouse",
+  "item_section",
+  "items",
+  "goods_recevied_deatils_section",
+  "driver_name",
+  "vehical_no",
+  "column_break_cnokz",
+  "good_recever_name",
+  "more_info_section",
+  "status",
+  "create_by",
+  "column_break_i29pq",
+  "amended_from",
+  "good_transfer_reference_number",
+  "good_received_reference_number"
+ ],
+ "fields": [
+  {
+   "allow_on_submit": 1,
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nDraft\nGoods In Transit\nGoods Received\nCompleted\nRejected",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Good Transfer",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "more_info_section",
+   "fieldtype": "Section Break",
+   "label": "More Info"
+  },
+  {
+   "fieldname": "column_break_hkrvq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "date_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Date Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warehouse_details_section",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Details"
+  },
+  {
+   "default": "__user",
+   "fieldname": "create_by",
+   "fieldtype": "Link",
+   "label": "Create By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_i29pq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tlph7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_section",
+   "fieldtype": "Section Break",
+   "label": "Item"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "GT-.YY.-.MM.-"
+  },
+  {
+   "fieldname": "goods_recevied_deatils_section",
+   "fieldtype": "Section Break",
+   "label": "Others Deatils"
+  },
+  {
+   "fieldname": "good_recever_name",
+   "fieldtype": "Data",
+   "label": "Good Recever Name"
+  },
+  {
+   "fieldname": "vehical_no",
+   "fieldtype": "Data",
+   "label": "Vehical No"
+  },
+  {
+   "fieldname": "column_break_cnokz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Good Transfer Item",
+   "options": "Good Transfer Item"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "good_transfer_reference_number",
+   "fieldtype": "Data",
+   "label": "Good Transfer Reference Number"
+  },
+  {
+   "fieldname": "good_received_reference_number",
+   "fieldtype": "Data",
+   "label": "Good Received Reference Number"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-12-24 14:17:25.027230",
+ "modified_by": "Administrator",
+ "module": "Abtl Addon",
+ "name": "Good Transfer",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Store Team",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

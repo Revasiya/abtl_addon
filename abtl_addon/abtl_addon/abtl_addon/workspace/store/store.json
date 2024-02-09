@@ -1,0 +1,69 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"5vCVhgkiXl\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Selling</b></span>\",\"col\":6}},{\"id\":\"6UJabWtQjL\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Buying</b></span>\",\"col\":6}},{\"id\":\"7cVhSOP-2F\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Delivery Note\",\"col\":6}},{\"id\":\"d6pCP5yChZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Receipt\",\"col\":6}},{\"id\":\"FABcNnY7Ca\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Delivery Note List\",\"col\":6}},{\"id\":\"V4SSw7ziGg\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Purchase Receipt List\",\"col\":6}},{\"id\":\"ScGczSuA3D\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Report</span>\",\"col\":12}},{\"id\":\"DenRSqlMIT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Qty Balance\",\"col\":6}}]",
+ "creation": "2023-12-14 17:19:22.661126",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "retail",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Store",
+ "links": [],
+ "modified": "2023-12-20 11:10:23.236266",
+ "modified_by": "Administrator",
+ "module": "Abtl Addon",
+ "name": "Store",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Delivery Note",
+   "label": "Delivery Note List",
+   "quick_list_filter": "[[\"Delivery Note\",\"status\",\"=\",\"Draft\",false]]"
+  },
+  {
+   "document_type": "Purchase Receipt",
+   "label": "Purchase Receipt List",
+   "quick_list_filter": "[[\"Purchase Receipt\",\"status\",\"=\",\"Draft\",false]]"
+  }
+ ],
+ "roles": [
+  {
+   "role": "Store Team"
+  }
+ ],
+ "sequence_id": 39.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Stock Qty Balance",
+   "link_to": "Stock Qty Balance",
+   "type": "Report"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Draft",
+   "label": "Purchase Receipt",
+   "link_to": "Purchase Receipt",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{} Draft",
+   "label": "Delivery Note",
+   "link_to": "Delivery Note",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Store"
+}
