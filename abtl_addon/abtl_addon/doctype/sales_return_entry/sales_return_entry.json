@@ -22,7 +22,8 @@
   "items",
   "section_break_qiw7t",
   "remark",
-  "column_break_ym5vv",
+  "column_break_85gq0",
+  "total_amount",
   "amended_from"
  ],
  "fields": [
@@ -106,19 +107,11 @@
    "reqd": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sales Return Entry",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
-   "options": "Customer"
+   "options": "Customer",
+   "reqd": 1
   },
   {
    "fetch_from": "customer.customer_name",
@@ -145,15 +138,30 @@
    "print_hide": 1
   },
   {
-   "fieldname": "column_break_ym5vv",
+   "fieldname": "column_break_85gq0",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sales Return Entry",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "icon": "fa fa-file-text",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-05 23:02:23.304330",
+ "modified": "2024-02-12 23:37:04.308128",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sales Return Entry",

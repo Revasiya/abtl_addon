@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import today
 
 class SalesReturnEntry(Document):
 	# pass
@@ -10,7 +11,6 @@ class SalesReturnEntry(Document):
 		stock_entry = frappe.get_doc({
 			"doctype": "Stock Entry",
 			"stock_entry_type": "Material Receipt",
-			"to_warehouse":self.warehouse,
 			"company":self.company,
 			"remark":self.remark,
 		})
@@ -28,6 +28,34 @@ class SalesReturnEntry(Document):
 
 		stock_entry.insert()
 		stock_entry.submit()
-		frappe.msgprint("Sales Return Created Succesfull")
+
+		#Journal Entry For Customer Account Add
+		jv_entry = frappe.get_doc({
+			"doctype": "Journal Entry",
+			"company": self.company,
+			"posting_date": today()
+		})
+		# Account
+		jv_entry.append("accounts", {
+			"account": "1310 - Debtors - ABTL",
+			'party_type': "Customer",
+			'party': self.customer,
+			"debit_in_account_currency": 0.00,
+			"debit": 0.00,
+			"credit_in_account_currency": abs(self.total_amount),
+			"credit": abs(self.total_amount)
+		})
+
+		jv_entry.append("accounts", {
+			"account": "1110 - Cash - ABTL",
+			"debit_in_account_currency": abs(self.total_amount),
+			"debit": abs(self.total_amount),
+			"credit_in_account_currency": 0.00,
+			"credit": 0.00
+		})
+
+		jv_entry.insert()
+		jv_entry.submit()
+		# frappe.msgprint("Sales Return Created Succesfull")
 			
 
