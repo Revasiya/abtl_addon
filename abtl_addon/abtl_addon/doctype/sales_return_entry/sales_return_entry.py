@@ -32,6 +32,7 @@ class SalesReturnEntry(Document):
 		#Journal Entry For Customer Account Add
 		jv_entry = frappe.get_doc({
 			"doctype": "Journal Entry",
+			"voucher_type":"Credit Note",
 			"company": self.company,
 			"posting_date": today()
 		})
@@ -42,8 +43,16 @@ class SalesReturnEntry(Document):
 			'party': self.customer,
 			"debit_in_account_currency": 0.00,
 			"debit": 0.00,
-			"credit_in_account_currency": abs(self.total_amount),
-			"credit": abs(self.total_amount)
+			"credit_in_account_currency": abs(self.net_total_amount),
+			"credit": abs(self.net_total_amount)
+		})
+
+		jv_entry.append("accounts", {
+			"account": self.vat,
+			"debit_in_account_currency": 0.00,
+			"debit": 0.00,
+			"credit_in_account_currency": abs(self.total_tax_amount),
+			"credit": abs(self.total_tax_amount)
 		})
 
 		jv_entry.append("accounts", {
