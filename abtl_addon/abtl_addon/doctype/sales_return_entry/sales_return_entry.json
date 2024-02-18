@@ -23,6 +23,10 @@
   "total_qty",
   "column_break_85gq0",
   "net_total_amount",
+  "accounts_section",
+  "debtors_account",
+  "column_break_mcsa5",
+  "cash_account",
   "tax_section",
   "taxes",
   "vat",
@@ -211,13 +215,36 @@
    "fieldtype": "Currency",
    "label": "Net Total Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "debtors_account",
+   "fieldtype": "Link",
+   "label": "Debtors Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mcsa5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cash_account",
+   "fieldtype": "Link",
+   "label": "Cash Account",
+   "options": "Account",
+   "reqd": 1
   }
  ],
  "icon": "fa fa-file-text",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-17 20:23:54.764524",
+ "modified": "2024-02-18 16:56:50.126202",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sales Return Entry",

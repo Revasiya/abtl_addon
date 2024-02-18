@@ -6,7 +6,28 @@ frappe.ui.form.on('Sales Return Entry', {
 		frm.set_query("vat", function() {
 			return {
 				filters: {
-					"is_group": "0"
+					"is_group": "0",
+                    "account_type":"Tax"
+				}
+		    };
+		});
+
+        //Debtors Filter
+        frm.set_query("debtors_account", function() {
+			return {
+				filters: {
+					"is_group": "0",
+                    "account_type":"Receivable"
+				}
+		    };
+		});
+
+        //Cash Filter
+        frm.set_query("cash_account", function() {
+			return {
+				filters: {
+					"is_group": "0",
+                    "account_type":"Cash"
 				}
 		    };
 		});

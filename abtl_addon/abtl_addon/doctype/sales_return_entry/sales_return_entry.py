@@ -38,7 +38,7 @@ class SalesReturnEntry(Document):
 		})
 		# Account
 		jv_entry.append("accounts", {
-			"account": "1310 - Debtors - ABTL",
+			"account": self.debtors_account,
 			'party_type': "Customer",
 			'party': self.customer,
 			"debit_in_account_currency": 0.00,
@@ -56,7 +56,7 @@ class SalesReturnEntry(Document):
 		})
 
 		jv_entry.append("accounts", {
-			"account": "1110 - Cash - ABTL",
+			"account": self.cash_account,
 			"debit_in_account_currency": abs(self.total_amount),
 			"debit": abs(self.total_amount),
 			"credit_in_account_currency": 0.00,
