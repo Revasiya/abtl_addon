@@ -5,7 +5,7 @@ import json
 import frappe
 
 def validate(doc,method):
-    items_zero_after_validate(doc)
+    # items_zero_after_validate(doc)
     create_DN(doc)
 
 
