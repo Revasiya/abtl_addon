@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
+ "autoname": "naming_series:",
  "creation": "2024-02-01 21:05:44.006271",
  "default_view": "List",
  "doctype": "DocType",
@@ -8,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "stock_entry_details_tab",
+  "naming_series",
   "customer",
   "customer_name",
   "col2",
@@ -15,14 +17,26 @@
   "posting_time",
   "column_break_eaoa",
   "company",
-  "section_break_jwgn",
-  "warehouse",
-  "sb0",
   "items_section",
   "items",
   "section_break_qiw7t",
+  "total_qty",
+  "column_break_85gq0",
+  "net_total_amount",
+  "accounts_section",
+  "debtors_account",
+  "column_break_mcsa5",
+  "cash_account",
+  "tax_section",
+  "taxes",
+  "vat",
+  "column_break_pbo0m",
+  "vat_rate",
+  "total_tax_amount",
+  "section_break_mha0b",
   "remark",
-  "column_break_ym5vv",
+  "column_break_yyjgu",
+  "total_amount",
   "amended_from"
  ],
  "fields": [
@@ -42,6 +56,7 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Company",
    "oldfieldname": "company",
    "oldfieldtype": "Link",
@@ -80,17 +95,6 @@
    "label": "Remarks"
   },
   {
-   "fieldname": "section_break_jwgn",
-   "fieldtype": "Section Break",
-   "hidden": 1,
-   "label": "Default Warehouse"
-  },
-  {
-   "fieldname": "sb0",
-   "fieldtype": "Section Break",
-   "options": "Simple"
-  },
-  {
    "fieldname": "items_section",
    "fieldtype": "Section Break",
    "label": "Items"
@@ -106,19 +110,12 @@
    "reqd": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sales Return Entry",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Customer",
-   "options": "Customer"
+   "options": "Customer",
+   "reqd": 1
   },
   {
    "fetch_from": "customer.customer_name",
@@ -132,31 +129,126 @@
    "fieldtype": "Section Break"
   },
   {
-   "description": "Sets 'Source Warehouse' in each row of the items table.",
-   "fieldname": "warehouse",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Warehouse",
-   "no_copy": 1,
-   "oldfieldname": "from_warehouse",
-   "oldfieldtype": "Link",
-   "options": "Warehouse",
-   "print_hide": 1
+   "fieldname": "column_break_85gq0",
+   "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_ym5vv",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "RTN-.YYYY.-.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "RTN-.YYYY.-.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Qty",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "tax_section",
+   "fieldtype": "Section Break",
+   "label": "Tax"
+  },
+  {
+   "fieldname": "taxes",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Taxes",
+   "options": "Sales Return Entry Tax"
+  },
+  {
+   "fieldname": "section_break_mha0b",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_tax_amount",
+   "fieldtype": "Currency",
+   "label": "Total Tax Amount",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yyjgu",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vat",
+   "fieldtype": "Link",
+   "label": "VAT",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pbo0m",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vat_rate",
+   "fieldtype": "Select",
+   "label": "VAT Rate",
+   "options": "\n0\n5",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sales Return Entry",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_total_amount",
+   "fieldtype": "Currency",
+   "label": "Net Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "debtors_account",
+   "fieldtype": "Link",
+   "label": "Debtors Account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mcsa5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cash_account",
+   "fieldtype": "Link",
+   "label": "Cash Account",
+   "options": "Account",
+   "reqd": 1
   }
  ],
  "icon": "fa fa-file-text",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-02-05 23:02:23.304330",
+ "modified": "2024-02-18 16:56:50.126202",
  "modified_by": "Administrator",
  "module": "Abtl Addon",
  "name": "Sales Return Entry",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -205,6 +297,5 @@
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+ "states": []
 }
