@@ -1,8 +1,13 @@
 # Copyright (c) 2023, envisionx Oman and contributors
 # For license information, please see license.txt
 
-import json
 import frappe
+from erpnext.erpnext_integrations.taxjar_integration import get_company_address_details
+from erpnext.stock.doctype.item.item import get_item_defaults
+from frappe.model.utils import get_fetch_values
+from erpnext.setup.doctype.item_group.item_group import get_item_group_defaults
+from frappe.model.mapper import get_mapped_doc
+from frappe.utils.data import cstr, flt
 
 def validate(doc,method):
     # items_zero_after_validate(doc)
@@ -25,108 +30,13 @@ def items_zero_after_validate(doc):
 
 def create_DN(doc):
     if doc.workflow_state == "Approved":
-        dn = frappe.get_doc({
-            "doctype": "Delivery Note",
-            "customer": doc.customer,
-            "posting_date":doc.transaction_date,
-            "company":doc.company,
-            "cost_center":doc.cost_center,
-            "currency":doc.currency,
-            "conversion_rate":doc.conversion_rate,
-            "selling_price_list":doc.selling_price_list,
-            "price_list_currency":doc.price_list_currency,
-            "plc_conversion_rate":doc.plc_conversion_rate,
-            "ignore_pricing_rule":doc.ignore_pricing_rule,
-            "set_warehouse":doc.set_warehouse,
-            "total_qty":doc.total_qty,
-            "base_total":doc.base_total,
-            "base_net_total":doc.base_net_total,
-            "total":doc.total,
-            "net_total":doc.net_total,
-            "tax_category":doc.tax_category,
-            "taxes_and_charges":doc.taxes_and_charges,
-            "shipping_rule":doc.shipping_rule,
-            "base_total_taxes_and_charges":doc.base_total_taxes_and_charges,
-            "total_taxes_and_charges":doc.total_taxes_and_charges,
-            "grand_total":doc.grand_total,
-            "rounding_adjustment":doc.rounding_adjustment,
-            "rounded_total":doc.rounded_total,
-            "in_words":doc.in_words,
-            "advance_paid":doc.advance_paid,
-            "disable_rounded_total":doc.disable_rounded_total,
-            "apply_discount_on":doc.apply_discount_on,
-            "additional_discount_percentage":doc.additional_discount_percentage,
-            "discount_amount":doc.discount_amount,
-            "other_charges_calculation":doc.other_charges_calculation,
-            "customer_address":doc.customer_address,
-            "address_display":doc.address_display,
-            "customer_group":doc.customer_group,
-            "territory":doc.territory,
-            "contact_person":doc.contact_person,
-            "contact_display":doc.contact_display,
-            "contact_phone":doc.contact_phone,
-            "contact_mobile":doc.contact_mobile,
-            "contact_email":doc.contact_email,
-            "shipping_address_name":doc.shipping_address_name,
-            "shipping_address":doc.shipping_address,
-            "dispatch_address_name":doc.dispatch_address_name,
-            "dispatch_address":doc.dispatch_address,
-            "company_address":doc.company_address,
-            "company_address_display":doc.company_address_display,
-            "custom_branch":doc.custom_branch
-        })
-        # Item
-        for i in doc.items:
-            dn.append("items",{
-                'item_code':i.item_code,
-                'item_name':i.item_name,
-                'description':i.description,
-                'item_group':i.item_group,
-                'brand':i.brand,
-                'qty':i.qty,
-                'stock_uom':i.stock_uom,
-                'uom':i.uom,
-                'conversion_factor':i.conversion_factor,
-                'stock_qty':i.stock_qty,
-                'price_list_rate':i.price_list_rate,
-                'base_price_list_rate':i.base_price_list_rate,
-                'rate':i.rate,
-                'amount':i.amount,
-                'pricing_rules':i.pricing_rules,
-                'stock_uom_rate':i.stock_uom_rate,
-                'is_free_item':i.is_free_item,
-                'grant_commission':i.grant_commission,
-                'net_rate':i.net_rate,
-                'net_amount':i.net_amount,
-                'billed_amt':i.billed_amt,
-                'target_warehouse':i.target_warehouse,
-                'rate':i.rate,
-                'amount':i.amount,
-                'against_sales_order':doc.name,
-                'actual_qty':i.actual_qty,
-            })
-        # Tax
-        for t in doc.taxes:
-            dn.append("taxes",{
-                'charge_type':t.charge_type,
-                'account_head':t.account_head,
-                'description':t.description,
-                'included_in_print_rate':t.included_in_print_rate,
-                'included_in_paid_amount':t.included_in_paid_amount,
-                'cost_center':t.cost_center,
-                'rate':t.rate,
-                'account_currency':t.account_currency,
-                'tax_amount':t.tax_amount,
-                'total':t.total,
-                'tax_amount_after_discount_amount':t.tax_amount_after_discount_amount,
-                'base_tax_amount':t.base_tax_amount,
-                'base_total':t.base_total,
-                'base_tax_amount_after_discount_amount':t.base_tax_amount_after_discount_amount,
-                'item_wise_tax_detail':t.item_wise_tax_detail,
-                'dont_recompute_tax':t.dont_recompute_tax
-            })    
-        dn.insert()
-        frappe.msgprint("Create New Delivery Note Successfully")
+        delivery_note = make_delivery_note(doc.name)
+        delivery_note.allocate_advances_automatically = True
+        delivery_note.insert()
+        frappe.share.add("Delivery Note", delivery_note.name, user=frappe.session.user, read=1, write=1, share=1)
+        frappe.msgprint(msg='Delivery Note Created Successfully',
+                                title='Message',
+                                indicator='green')
         
 
 # Branch Wise Store Filter
@@ -171,3 +81,69 @@ def item_zero_not_show(warehouse):
         zero_qty.append(qty[0])
     return zero_qty
     
+
+
+@frappe.whitelist()
+def make_delivery_note(source_name, target_doc=None, skip_item_mapping=False):
+	from erpnext.stock.doctype.packed_item.packed_item import make_packing_list
+
+	def set_missing_values(source, target):
+		target.run_method("set_missing_values")
+		target.run_method("set_po_nos")
+		target.run_method("calculate_taxes_and_totals")
+
+		if source.company_address:
+			target.update({"company_address": source.company_address})
+		else:
+			# set company address
+			target.update(get_company_address_details(target.company))
+
+		if target.company_address:
+			target.update(get_fetch_values("Delivery Note", "company_address", target.company_address))
+
+		make_packing_list(target)
+
+	def update_item(source, target, source_parent):
+		target.base_amount = (flt(source.qty) - flt(source.delivered_qty)) * flt(source.base_rate)
+		target.amount = (flt(source.qty) - flt(source.delivered_qty)) * flt(source.rate)
+		target.qty = flt(source.qty) - flt(source.delivered_qty)
+
+		item = get_item_defaults(target.item_code, source_parent.company)
+		item_group = get_item_group_defaults(target.item_code, source_parent.company)
+
+		if item:
+			target.cost_center = (
+				frappe.db.get_value("Project", source_parent.project, "cost_center")
+				or item.get("buying_cost_center")
+				or item_group.get("buying_cost_center")
+			)
+
+	mapper = {
+		"Sales Order": {"doctype": "Delivery Note", "validation": {"docstatus": ["=", 0]}},
+		"Sales Taxes and Charges": {"doctype": "Sales Taxes and Charges", "add_if_empty": True},
+		"Sales Team": {"doctype": "Sales Team", "add_if_empty": True},
+	}
+
+	if not skip_item_mapping:
+
+		def condition(doc):
+			# make_mapped_doc sets js `args` into `frappe.flags.args`
+			if frappe.flags.args and frappe.flags.args.delivery_dates:
+				if cstr(doc.delivery_date) not in frappe.flags.args.delivery_dates:
+					return False
+			return abs(doc.delivered_qty) < abs(doc.qty) and doc.delivered_by_supplier != 1
+
+		mapper["Sales Order Item"] = {
+			"doctype": "Delivery Note Item",
+			"field_map": {
+				"rate": "rate",
+				"name": "so_detail",
+				"parent": "against_sales_order",
+			},
+			"postprocess": update_item,
+			"condition": condition,
+		}
+
+	target_doc = get_mapped_doc("Sales Order", source_name, mapper, target_doc, set_missing_values)
+
+	return target_doc
